@@ -1,0 +1,29 @@
+<header class="site-header">
+  <div class="wrap site-header__row">
+    <a href="{{ routes.root_url }}" class="site-header__logo">PAD<span>.</span>CO</a>
+
+    <nav class="site-nav">
+      {% for link in linklists[section.settings.menu].links %}
+        <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+      {% endfor %}
+    </nav>
+
+    <div class="site-header__icons">
+      <a href="{{ routes.search_url }}" class="mono">Search</a>
+      <a href="{{ routes.account_url }}" class="mono">Account</a>
+      <a href="{{ routes.cart_url }}" class="mono">
+        Bag{% if cart.item_count > 0 %}<span class="cart-count">{{ cart.item_count }}</span>{% endif %}
+      </a>
+      <button class="nav-toggle" aria-label="Menu">Menu</button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" }
+  ]
+}
+{% endschema %}

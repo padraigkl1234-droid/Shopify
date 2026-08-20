@@ -1,0 +1,19 @@
+<section class="section section--tight">
+  <div class="wrap" style="max-width: 720px;">
+    {% if section.settings.eyebrow != blank %}<p class="mono accent" style="margin-bottom:14px;">{{ section.settings.eyebrow }}</p>{% endif %}
+    {% if section.settings.heading != blank %}<h2>{{ section.settings.heading }}</h2>{% endif %}
+    <div class="rte">{{ section.settings.text }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE STUDIO" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Art before hype." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>PAD.CO works with independent artists on limited screen-print runs. Every design is credited. Every run ends. No restocks, no algorithm-chasing colourways — just the print, the cotton, and the artist behind it.</p>" }
+  ],
+  "presets": [{ "name": "Rich text" }]
+}
+{% endschema %}

@@ -1,0 +1,47 @@
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <div>
+      <div class="site-footer__logo">PAD<span>.</span>CO</div>
+      <p class="mono" style="color: var(--concrete); max-width: 32ch;">{{ section.settings.blurb }}</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        {% for link in linklists[section.settings.shop_menu].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <ul>
+        {% for link in linklists[section.settings.help_menu].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div>
+      <h4>Newsletter</h4>
+      {% form 'customer' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input type="email" name="contact[email]" placeholder="EMAIL ADDRESS" class="mono" style="background:transparent;border:2px solid var(--paper);color:var(--paper);padding:12px;width:100%;margin-bottom:10px;">
+        <button type="submit" class="btn btn--red" style="width:100%;">Sign up</button>
+      {% endform %}
+    </div>
+  </div>
+  <div class="wrap site-footer__bottom">
+    <span>&copy; {{ 'now' | date: '%Y' }} PAD.CO. All rights reserved.</span>
+    <span>Art credited before the brand.</span>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "blurb", "label": "Blurb", "default": "Art-print tees and hoodies. Dry confidence over hype-speak." },
+    { "type": "link_list", "id": "shop_menu", "label": "Shop menu", "default": "footer" },
+    { "type": "link_list", "id": "help_menu", "label": "Help menu", "default": "footer" }
+  ]
+}
+{% endschema %}

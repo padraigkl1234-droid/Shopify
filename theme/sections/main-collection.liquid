@@ -1,0 +1,33 @@
+<div class="collection-head">
+  <div class="wrap">
+    <p class="mono">{{ collection.products_count }} PRODUCTS</p>
+    <h1>{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <div class="rte" style="max-width:60ch; margin-top:12px; color:var(--concrete);">{{ collection.description }}</div>
+    {% endif %}
+  </div>
+</div>
+
+<section class="section section--tight">
+  <div class="wrap">
+    {% paginate collection.products by 24 %}
+      <div class="grid">
+        {% for product in collection.products %}
+          {% render 'product-card', product: product %}
+        {% else %}
+          <div class="empty-state"><p class="mono">No products yet.</p></div>
+        {% endfor %}
+      </div>
+      {% if paginate.pages > 1 %}
+        <div style="display:flex; justify-content:center; gap:16px; margin-top:40px; font-family:var(--font-mono);">
+          {% if paginate.previous %}<a href="{{ paginate.previous.url }}">&larr; Prev</a>{% endif %}
+          {% if paginate.next %}<a href="{{ paginate.next.url }}">Next &rarr;</a>{% endif %}
+        </div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Collection", "settings": [] }
+{% endschema %}

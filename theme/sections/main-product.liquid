@@ -1,0 +1,85 @@
+{%- assign product = product -%}
+<section class="product">
+  <div class="wrap product__layout">
+    <div class="product__gallery">
+      <div class="product__gallery-main">
+        {% if product.selected_or_first_available_variant.featured_media %}
+          <img id="ProductMainImage" src="{{ product.selected_or_first_available_variant.featured_media | image_url: width: 1000 }}" alt="{{ product.title | escape }}">
+        {% elsif product.featured_media %}
+          <img id="ProductMainImage" src="{{ product.featured_media | image_url: width: 1000 }}" alt="{{ product.title | escape }}">
+        {% endif %}
+      </div>
+      {% if product.media.size > 1 %}
+        <div class="product__thumbs">
+          {% for media in product.media %}
+            <img src="{{ media | image_url: width: 200 }}" alt="" data-full="{{ media | image_url: width: 1000 }}" class="product-thumb{% if forloop.first %} is-active{% endif %}">
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="product__info">
+      <p class="mono product__vendor">{{ product.vendor }}</p>
+      <h1 class="product__title">{{ product.title }}</h1>
+      <p class="product__price">
+        {% if product.compare_at_price > product.price %}
+          <s>{{ product.compare_at_price | money }}</s>{{ product.price | money }}
+        {% else %}
+          {{ product.price | money }}
+        {% endif %}
+      </p>
+
+      {% form 'product', product %}
+        {% for option in product.options_with_values %}
+          <label class="mono">{{ option.name }}</label>
+          <div class="swatches">
+            {% for value in option.values %}
+              <button type="button" class="swatch" data-option-index="{{ forloop.parentloop.index0 }}" data-value="{{ value | escape }}">{{ value }}</button>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        <select name="id" id="ProductVariantSelect" style="display:none;">
+          {% for variant in product.variants %}
+            <option value="{{ variant.id }}"{% if variant == product.selected_or_first_available_variant %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>
+              {{ variant.title }} {% unless variant.available %}— Sold out{% endunless %}
+            </option>
+          {% endfor %}
+        </select>
+
+        <button type="submit" name="add" class="btn btn--red" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %} style="width:100%;">
+          {% if product.selected_or_first_available_variant.available %}Add to bag &mdash; {{ product.selected_or_first_available_variant.price | money }}{% else %}Sold out{% endif %}
+        </button>
+      {% endform %}
+
+      <div class="product__meta">
+        <p class="mono" style="color:var(--concrete);">SKU {{ product.selected_or_first_available_variant.sku | default: "—" }}</p>
+        <p class="mono" style="color:var(--concrete);">Screen-printed · Heavyweight cotton · Made to order</p>
+      </div>
+
+      <div class="product__desc rte">
+        {{ product.description }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var select = document.getElementById('ProductVariantSelect');
+  document.querySelectorAll('.product-thumb').forEach(function(t){
+    t.addEventListener('click', function(){
+      document.getElementById('ProductMainImage').src = t.dataset.full;
+      document.querySelectorAll('.product-thumb').forEach(function(o){ o.classList.remove('is-active'); });
+      t.classList.add('is-active');
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Product information",
+  "settings": []
+}
+{% endschema %}

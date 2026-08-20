@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "story": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "404",
+        "heading": "Page not found.",
+        "text": "<p>That page doesn't exist. <a href=\"/\">Back to PAD.CO</a>.</p>"
+      }
+    }
+  },
+  "order": ["story"]
+}

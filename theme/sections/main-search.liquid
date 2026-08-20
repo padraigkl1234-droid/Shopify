@@ -1,0 +1,30 @@
+<div class="collection-head">
+  <div class="wrap">
+    <p class="mono">SEARCH</p>
+    <h1>{% if search.performed %}Results for &ldquo;{{ search.terms | escape }}&rdquo;{% else %}Search{% endif %}</h1>
+  </div>
+</div>
+
+<section class="section section--tight">
+  <div class="wrap">
+    {% form 'search' %}
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="SEARCH PRODUCTS" class="mono" style="width:100%; padding:16px; border:2px solid var(--ink); background:transparent; margin-bottom:32px;">
+    {% endform %}
+
+    {% if search.performed %}
+      <div class="grid">
+        {% for item in search.results %}
+          {% if item.object_type == 'product' %}
+            {% render 'product-card', product: item %}
+          {% endif %}
+        {% else %}
+          <div class="empty-state"><p class="mono">No results.</p></div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

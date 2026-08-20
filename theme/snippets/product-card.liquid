@@ -1,0 +1,23 @@
+{%- comment -%} Expects: product {%- endcomment -%}
+<a href="{{ product.url }}" class="card">
+  <div class="card__media">
+    {% if product.featured_media %}
+      <img src="{{ product.featured_media | image_url: width: 600 }}" alt="{{ product.featured_media.alt | default: product.title | escape }}" loading="lazy" width="600" height="750">
+    {% endif %}
+    {% if product.compare_at_price > product.price %}
+      <span class="card__badge">Sale</span>
+    {% elsif product.created_at and product.created_at.to_date != null and product.tags contains 'new' %}
+      <span class="card__badge">New</span>
+    {% endif %}
+  </div>
+  <div class="card__body">
+    <p class="card__title">{{ product.title }}</p>
+    <p class="card__price">
+      {% if product.compare_at_price > product.price %}
+        <s>{{ product.compare_at_price | money }}</s>{{ product.price | money }}
+      {% else %}
+        {{ product.price | money }}
+      {% endif %}
+    </p>
+  </div>
+</a>

@@ -1,0 +1,16 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "PAD.CO",
+    "theme_version": "1.0.0",
+    "theme_author": "PAD.CO",
+    "theme_support_email": "padraigkl1234@gmail.com",
+    "theme_documentation_url": "https://padinc-2.myshopify.com"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "header", "content": "Brand palette (reference only — set in theme.css)" }
+    ]
+  }
+]

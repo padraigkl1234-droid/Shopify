@@ -1,0 +1,25 @@
+<section class="hero">
+  <div class="hero__stripe"></div>
+  <div class="hero__inner">
+    <span class="mono hero__tag">{{ section.settings.eyebrow }}</span>
+    <h1 class="hero__title">{{ section.settings.heading }}</h1>
+    <p class="hero__sub">{{ section.settings.subheading }}</p>
+    {% if section.settings.button_label != blank %}
+      <a href="{{ section.settings.button_url }}" class="btn btn--red">{{ section.settings.button_label }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "NEW DROP — 001" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "PRINT IT. WEAR IT. OWN IT." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Original art, screen-printed onto heavyweight cotton. Limited runs, no restocks." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the drop" },
+    { "type": "url", "id": "button_url", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

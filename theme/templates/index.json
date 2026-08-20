@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "hero": { "type": "hero" },
+    "featured": {
+      "type": "featured-collection",
+      "settings": { "heading": "New drops" }
+    },
+    "story": { "type": "rich-text" }
+  },
+  "order": ["hero", "featured", "story"]
+}
