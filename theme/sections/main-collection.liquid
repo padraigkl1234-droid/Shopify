@@ -8,6 +8,8 @@
   </div>
 </div>
 
+{% render 'category-tabs', current_handle: collection.handle %}
+
 <section class="section section--tight">
   <div class="wrap">
     {% paginate collection.products by 24 %}

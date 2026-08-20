@@ -6,13 +6,13 @@
     {% endif %}
     {% if product.compare_at_price > product.price %}
       <span class="card__badge">Sale</span>
-    {% elsif product.created_at and product.created_at.to_date != null and product.tags contains 'new' %}
+    {% elsif product.tags contains 'new' %}
       <span class="card__badge">New</span>
     {% endif %}
   </div>
   <div class="card__body">
-    <p class="card__title">{{ product.title }}</p>
-    <p class="card__price">
+    <p class="card__title mono">{{ product.title }}</p>
+    <p class="card__price mono">
       {% if product.compare_at_price > product.price %}
         <s>{{ product.compare_at_price | money }}</s>{{ product.price | money }}
       {% else %}

@@ -1,5 +1,10 @@
-<section class="hero">
-  <div class="hero__stripe"></div>
+<section class="hero{% if section.settings.background_image %} hero--image{% endif %}">
+  {% if section.settings.background_image %}
+    <img class="hero__bg" src="{{ section.settings.background_image | image_url: width: 1800 }}" alt="" loading="eager">
+    <div class="hero__scrim"></div>
+  {% else %}
+    <div class="hero__stripe"></div>
+  {% endif %}
   <div class="hero__inner">
     <span class="mono hero__tag">{{ section.settings.eyebrow }}</span>
     <h1 class="hero__title">{{ section.settings.heading }}</h1>
@@ -14,6 +19,7 @@
 {
   "name": "Hero",
   "settings": [
+    { "type": "image_picker", "id": "background_image", "label": "Background image (optional — full-bleed under the nav)" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "NEW DROP — 001" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "PRINT IT. WEAR IT. OWN IT." },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Original art, screen-printed onto heavyweight cotton. Limited runs, no restocks." },

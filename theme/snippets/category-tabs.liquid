@@ -1,0 +1,11 @@
+{%- comment -%} Horizontal collection tab bar, Palace-style. Expects: current_handle (optional string) {%- endcomment -%}
+<div class="tabs-wrap">
+  <nav class="tabs">
+    <a href="{{ routes.all_products_collection_url }}" class="tabs__item{% if current_handle == 'all' or current_handle == blank %} is-active{% endif %}">All</a>
+    {% for link in linklists['main-menu'].links %}
+      {% if link.url contains '/collections/' and link.url != routes.all_products_collection_url %}
+        <a href="{{ link.url }}" class="tabs__item{% if link.url contains current_handle and current_handle != blank %} is-active{% endif %}">{{ link.title }}</a>
+      {% endif %}
+    {% endfor %}
+  </nav>
+</div>
